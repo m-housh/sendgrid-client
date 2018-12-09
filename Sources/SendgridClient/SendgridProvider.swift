@@ -10,6 +10,8 @@ import Vapor
 
 public final class SendgridProvider: Provider {
     
+    public init() { }
+    
     public func register(_ services: inout Services) throws {
         services.register(SendgridClient.self)
     }
