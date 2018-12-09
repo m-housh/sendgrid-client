@@ -19,6 +19,10 @@ public protocol PersonalizationRepresentable: Content {
 public struct PreSalesTemplateData: TemplateDataRepresentable, Content {
     
     public let senderName: String
+    
+    public init(senderName: String) {
+        self.senderName = senderName
+    }
 }
 
 public struct PreSalesPersonalization: PersonalizationRepresentable {
@@ -27,5 +31,10 @@ public struct PreSalesPersonalization: PersonalizationRepresentable {
     
     public let to: [Email]
     public let dynamic_template_data: PreSalesTemplateData
+    
+    public init(to emails: [Email], dynamic_template_data: PreSalesTemplateData) {
+        self.to = emails
+        self.dynamic_template_data = dynamic_template_data
+    }
 }
 
