@@ -7,6 +7,7 @@
 
 import Vapor
 
+/// Container for an email representation.
 public struct Email: Content {
     public let email: String
     public let name: String?

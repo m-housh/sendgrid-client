@@ -7,13 +7,15 @@
 
 import Vapor
 
-
-public struct SendgridRequest<P>: Content where P: PersonalizationRepresentable {
+public protocol SendgridRequestRepresentable {
     
-    public let personalizations: [P]
+}
+
+
+public struct SendgridRequest: Content {
+    public let personalizations: [Personalization]
     public let from: Email
     public let reply_to: Email
     public let template_id: String
-    
 }
 

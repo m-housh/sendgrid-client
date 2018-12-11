@@ -10,10 +10,23 @@ import Vapor
 
 @testable import SendgridClient
 
+enum SendgridTestError: Error {
+    case emailNotFound
+}
 
 final class SendgridTests: XCTestCase, VaporTestCase {
     
     var app: Application!
+    
+    func email() throws -> Email {
+        guard let email = Environment.get("SG_EMAIL") else {
+            throw SendgridTestError.emailNotFound
+        }
+        
+        let name = Environment.get("SG_NAME")
+        
+        return Email(email: email, name: name)
+    }
     
     override func setUp() {
         perform {
@@ -24,12 +37,18 @@ final class SendgridTests: XCTestCase, VaporTestCase {
     func testClient() {
         perform {
             let sg_client = try app.make(SendgridClient.self)
-            let email = Email(email: "mhoush@houshhomeenergy.com", name: "Michael Housh")
-            let personalization = PreSalesPersonalization(to: [email], dynamic_template_data: PreSalesTemplateData(senderName: "Michael Housh"))
+            let email = try self.email()
+            let senderName = email.name ?? "Test Sender Name"
             
-            let req = SendgridRequest<PreSalesPersonalization>(personalizations: [personalization], from: email, reply_to: email, template_id: "d-399fe5e4af16408f9ba34e213b41fa57")
+            let personalization = Personalization(to: [email], senderName: senderName)
             
-            _ = try sg_client.send(req, on: app)
+            let req = TemplateType.preQuote.request(
+                personalizations: [personalization],
+                from: email,
+                reply_to: email
+            )
+            
+            _ = try sg_client.send(req, on: app).wait()
             
         }
     }

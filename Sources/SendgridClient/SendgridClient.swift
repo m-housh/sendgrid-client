@@ -20,16 +20,13 @@ public final class SendgridClient {
         self.api_key = api_key
     }
     
-    public func send<P>(_ req: SendgridRequest<P>, on worker: Container) throws -> Future<Void> where P: PersonalizationRepresentable {
+    public func send(_ req: SendgridRequest, on worker: Container) throws -> Future<Response>  {
         let client = try worker.make(Client.self)
         var headers = HTTPHeaders()
         headers.bearerAuthorization = BearerAuthorization(token: api_key)
-        return client.put(url, headers: headers) { request in
+        return client.post(url, headers: headers) { request in
             try request.content.encode(req)
-        }.map { _ in
-            return
         }
-        
     }
 }
 
