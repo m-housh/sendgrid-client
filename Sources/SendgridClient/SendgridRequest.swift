@@ -12,6 +12,7 @@ public protocol SendgridRequestRepresentable {
 }
 
 
+/// Representation of a request sent to the Sendgrid API.
 public struct SendgridRequest: Content {
     public let personalizations: [Personalization]
     public let from: Email

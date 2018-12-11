@@ -8,6 +8,7 @@
 import Foundation
 
 
+/// Errors for `SendgridClient`.
 public enum SendgridError: Error {
     case apiKeyNotFound
 }

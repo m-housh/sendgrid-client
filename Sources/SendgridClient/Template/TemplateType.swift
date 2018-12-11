@@ -8,6 +8,7 @@
 import Foundation
 
 
+/// The different template types available.
 public enum TemplateType {
     case preQuote
     case preSalesVisit
@@ -16,7 +17,8 @@ public enum TemplateType {
 
 extension TemplateType {
     
-    var template_id: String {
+    /// The Sendgrid template id for the template.
+    private var template_id: String {
         switch self {
         case .preQuote:
             return "d-399fe5e4af16408f9ba34e213b41fa57"
@@ -27,7 +29,8 @@ extension TemplateType {
         }
     }
     
-    func request(personalizations: [Personalization], from: Email, reply_to: Email) -> SendgridRequest {
+    /// Builds a `SendgridRequest` for the template type.
+    public func request(personalizations: [Personalization], from: Email, reply_to: Email) -> SendgridRequest {
         
         return SendgridRequest(
             personalizations: personalizations,

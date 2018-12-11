@@ -7,8 +7,9 @@
 
 import Vapor
 
-
+/// A vapor service responsible for sending requests to the Sendgrid API.
 public final class SendgridClient {
+    
     public let api_key: String
     private let url: String = "https://api.sendgrid.com/v3/mail/send"
     

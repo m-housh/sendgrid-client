@@ -8,6 +8,7 @@
 import Vapor
 
 
+/// Vapor provider for `SendgridClient`.
 public final class SendgridProvider: Provider {
     
     public init() { }

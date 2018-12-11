@@ -7,6 +7,7 @@
 
 import Vapor
 
+/// Common template information needed for dynamic templates.
 public struct TemplateData: Content {
     
     public var senderName: String
