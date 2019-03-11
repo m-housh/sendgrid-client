@@ -1,0 +1,4 @@
+module CNIOOpenSSL {
+    umbrella "/Users/michael/Documents/Projects/Xcode/MyProjects/SendgridClient/.build/checkouts/swift-nio-ssl.git--3837718913236223361/Sources/CNIOOpenSSL/include"
+    export *
+}

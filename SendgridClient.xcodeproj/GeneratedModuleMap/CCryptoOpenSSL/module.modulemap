@@ -1,0 +1,4 @@
+module CCryptoOpenSSL {
+    umbrella "/Users/michael/Documents/Projects/Xcode/MyProjects/SendgridClient/.build/checkouts/crypto.git--9085025851747186453/Sources/CCryptoOpenSSL/include"
+    export *
+}
