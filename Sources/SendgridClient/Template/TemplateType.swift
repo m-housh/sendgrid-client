@@ -7,6 +7,7 @@
 
 import Foundation
 
+/*
 
 /// The different template types available.
 public enum TemplateType {
@@ -30,9 +31,9 @@ extension TemplateType {
     }
     
     /// Builds a `SendgridRequest` for the template type.
-    public func request(personalizations: [Personalization], from: Email, reply_to: Email) -> SendgridRequest {
+    public func request(personalizations: [Personalization], from: Email, reply_to: Email) -> SendgridMailRequest {
         
-        return SendgridRequest(
+        return SendgridMailRequest(
             personalizations: personalizations,
             from: from,
             reply_to: reply_to,
@@ -40,3 +41,4 @@ extension TemplateType {
         )
     }
 }
+*/

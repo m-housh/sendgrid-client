@@ -15,6 +15,7 @@ public final class SendgridProvider: Provider {
     
     public func register(_ services: inout Services) throws {
         services.register(SendgridClient.self)
+        services.register(SendgridEnvironmentConfig.self)
     }
     
     public func didBoot(_ container: Container) throws -> EventLoopFuture<Void> {

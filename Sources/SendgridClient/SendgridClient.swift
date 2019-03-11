@@ -11,7 +11,7 @@ import Vapor
 public final class SendgridClient {
     
     public let api_key: String
-    private let url: String = "https://api.sendgrid.com/v3/mail/send"
+    private let url: String = "https://api.sendgrid.com/v3"
     
     public init() throws {
         guard let api_key = Environment.get("SG_API_KEY") else {
@@ -21,11 +21,15 @@ public final class SendgridClient {
         self.api_key = api_key
     }
     
-    public func send(_ req: SendgridRequest, on worker: Container) throws -> Future<Response>  {
+    private func url(for req: SendgridRequest) -> String {
+        return "\(url)/\(req.path)"
+    }
+    
+    public func send<R>(_ req: R, on worker: Container) throws -> Future<Response> where R: SendgridRequest, R: Content {
         let client = try worker.make(Client.self)
         var headers = HTTPHeaders()
         headers.bearerAuthorization = BearerAuthorization(token: api_key)
-        return client.post(url, headers: headers) { request in
+        return client.post(url(for: req), headers: headers) { request in
             try request.content.encode(req)
         }
     }
